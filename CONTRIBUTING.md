@@ -92,8 +92,8 @@ export function register(server: McpServer) {
 }
 ```
 
-1. Import and call `register(server)` in `src/server.ts`
-1. Add tests in `tests/tools/your-tool.test.ts`
+2. Import and call `register(server)` in `src/server.ts`
+3. Add tests in `tests/tools/your-tool.test.ts`
 
 ---
 
