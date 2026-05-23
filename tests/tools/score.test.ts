@@ -63,7 +63,9 @@ describe("hound_score", () => {
   });
 
   it("flags copyleft license", async () => {
-    vi.mocked(depsdev.getVersion).mockResolvedValue(mockVersion({ licenses: ["GPL-3.0"] } as never));
+    vi.mocked(depsdev.getVersion).mockResolvedValue(
+      mockVersion({ licenses: ["GPL-3.0"] } as never),
+    );
     vi.mocked(depsdev.extractProjectId).mockReturnValue(null);
     vi.mocked(osv.queryVulns).mockResolvedValue([]);
 
@@ -88,7 +90,12 @@ describe("hound_score", () => {
       license: "MIT",
       description: "Fast web framework",
       homepage: "https://expressjs.com",
-      scorecard: { date: "2024-01-01", repository: { name: "express", commit: "abc" }, overallScore: 7.5, checks: [] },
+      scorecard: {
+        date: "2024-01-01",
+        repository: { name: "express", commit: "abc" },
+        overallScore: 7.5,
+        checks: [],
+      },
     });
     vi.mocked(osv.queryVulns).mockResolvedValue([]);
 
@@ -182,9 +189,7 @@ describe("hound_score", () => {
       { id: "GHSA-a" } as never,
       { id: "GHSA-b" } as never,
     ]);
-    vi.mocked(osv.extractSeverity)
-      .mockReturnValueOnce("MODERATE")
-      .mockReturnValueOnce("LOW");
+    vi.mocked(osv.extractSeverity).mockReturnValueOnce("MODERATE").mockReturnValueOnce("LOW");
 
     const result = await (tool.handler as (args: Record<string, unknown>) => Promise<unknown>)({
       name: "express",
@@ -217,7 +222,9 @@ describe("hound_score", () => {
   it("returns F grade for a heavily penalized package", async () => {
     // 3 CRITICAL vulns (0/40) + no scorecard (0/25) + stale >2yr (5/20) + no license (5/15) = 10 → F
     const oldDate = new Date(Date.now() - 800 * 24 * 60 * 60 * 1000).toISOString();
-    vi.mocked(depsdev.getVersion).mockResolvedValue(mockVersion({ publishedAt: oldDate, licenses: [] }));
+    vi.mocked(depsdev.getVersion).mockResolvedValue(
+      mockVersion({ publishedAt: oldDate, licenses: [] }),
+    );
     vi.mocked(depsdev.extractProjectId).mockReturnValue(null);
     vi.mocked(osv.queryVulns).mockResolvedValue([
       { id: "GHSA-1" } as never,
@@ -268,7 +275,12 @@ describe("hound_score", () => {
       license: "MIT",
       description: "",
       homepage: "",
-      scorecard: { date: "2024-01-01", repository: { name: "test", commit: "abc" }, overallScore: 5.0, checks: [] },
+      scorecard: {
+        date: "2024-01-01",
+        repository: { name: "test", commit: "abc" },
+        overallScore: 5.0,
+        checks: [],
+      },
     });
     vi.mocked(osv.queryVulns).mockResolvedValue([{ id: "GHSA-1" } as never]);
     vi.mocked(osv.extractSeverity).mockReturnValue("CRITICAL");

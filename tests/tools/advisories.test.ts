@@ -61,7 +61,9 @@ describe("hound_advisories", () => {
     vi.mocked(osv.getVuln).mockResolvedValue(OSV_FIXTURE);
     vi.mocked(depsdev.getAdvisory).mockResolvedValue(DEPSDEV_ADVISORY_FIXTURE);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ id: "GHSA-rv95-896h-c2vc" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ id: "GHSA-rv95-896h-c2vc" });
     const text = getText(result);
     expect(text).toContain("GHSA-rv95-896h-c2vc");
     expect(text).toContain("Express.js Open Redirect in malformed URLs");
@@ -75,7 +77,9 @@ describe("hound_advisories", () => {
     vi.mocked(osv.getVuln).mockRejectedValue(new Error("Not found"));
     vi.mocked(depsdev.getAdvisory).mockResolvedValue(DEPSDEV_ADVISORY_FIXTURE);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ id: "GHSA-rv95-896h-c2vc" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ id: "GHSA-rv95-896h-c2vc" });
     const text = getText(result);
     expect(text).toContain("GHSA-rv95-896h-c2vc");
     expect(text).toContain("Express.js Open Redirect");
@@ -86,7 +90,9 @@ describe("hound_advisories", () => {
     vi.mocked(osv.getVuln).mockRejectedValue(new Error("Not found"));
     vi.mocked(depsdev.getAdvisory).mockRejectedValue(new Error("Not found"));
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ id: "GHSA-xxxx-yyyy-zzzz" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ id: "GHSA-xxxx-yyyy-zzzz" });
     const text = getText(result);
     expect(text).toContain("Could not find advisory");
     expect(text).toContain("GHSA-xxxx-yyyy-zzzz");
@@ -96,7 +102,9 @@ describe("hound_advisories", () => {
     vi.mocked(osv.getVuln).mockResolvedValue(OSV_FIXTURE);
     vi.mocked(depsdev.getAdvisory).mockResolvedValue(DEPSDEV_ADVISORY_FIXTURE);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ id: "GHSA-rv95-896h-c2vc" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ id: "GHSA-rv95-896h-c2vc" });
     const text = getText(result);
     expect(text).toContain("github.com/expressjs/express/security/advisories");
   });

@@ -27,11 +27,7 @@ describe("hound_upgrade", () => {
 
   it("returns minimum safe version when found", async () => {
     vi.mocked(depsdev.getPackage).mockResolvedValue(mockPackage(["4.17.20", "4.17.21", "4.17.22"]));
-    vi.mocked(osv.queryVulnsBatch).mockResolvedValue([
-      [{ id: "GHSA-x" } as never],
-      [],
-      [],
-    ]);
+    vi.mocked(osv.queryVulnsBatch).mockResolvedValue([[{ id: "GHSA-x" } as never], [], []]);
 
     const result = await (tool.handler as (args: Record<string, unknown>) => Promise<unknown>)({
       name: "lodash",

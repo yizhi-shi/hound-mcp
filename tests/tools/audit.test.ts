@@ -44,7 +44,13 @@ describe("hound_audit", () => {
 
   it("reports vulnerabilities found in dependencies", async () => {
     vi.mocked(osv.queryVulnsBatch).mockResolvedValue([
-      [{ id: "GHSA-critical", summary: "Remote code execution", database_specific: { severity: "CRITICAL" } } as never],
+      [
+        {
+          id: "GHSA-critical",
+          summary: "Remote code execution",
+          database_specific: { severity: "CRITICAL" },
+        } as never,
+      ],
       [],
     ]);
     vi.mocked(osv.extractSeverity).mockReturnValue("CRITICAL");

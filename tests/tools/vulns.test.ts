@@ -42,7 +42,9 @@ describe("hound_vulns", () => {
 
   it("returns no-vulnerability message when none found", async () => {
     vi.mocked(osv.queryVulns).mockResolvedValue([]);
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ name: "express", version: "4.19.2", ecosystem: "npm" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ name: "express", version: "4.19.2", ecosystem: "npm" });
     expect(getText(result)).toContain("No known vulnerabilities");
   });
 
@@ -51,7 +53,9 @@ describe("hound_vulns", () => {
     vi.mocked(osv.extractSeverity).mockReturnValue("MODERATE");
     vi.mocked(osv.extractFixVersions).mockReturnValue(["4.19.2"]);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ name: "express", version: "4.18.2", ecosystem: "npm" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ name: "express", version: "4.18.2", ecosystem: "npm" });
     const text = getText(result);
     expect(text).toContain("GHSA-rv95-896h-c2vc");
     expect(text).toContain("Express.js Open Redirect");
@@ -64,13 +68,17 @@ describe("hound_vulns", () => {
     vi.mocked(osv.extractSeverity).mockReturnValue("MODERATE");
     vi.mocked(osv.extractFixVersions).mockReturnValue([]);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ name: "express", version: "4.18.2", ecosystem: "npm" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ name: "express", version: "4.18.2", ecosystem: "npm" });
     expect(getText(result)).toContain("CVE-2024-29041");
   });
 
   it("handles API errors gracefully", async () => {
     vi.mocked(osv.queryVulns).mockRejectedValue(new Error("API down"));
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ name: "express", version: "4.18.2", ecosystem: "npm" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ name: "express", version: "4.18.2", ecosystem: "npm" });
     expect(getText(result)).toContain("Failed");
   });
 });

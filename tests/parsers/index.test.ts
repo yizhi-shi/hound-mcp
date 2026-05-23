@@ -234,8 +234,16 @@ describe("go.sum", () => {
   it("parses modules and deduplicates go.mod entries", () => {
     const deps = parseLockfile("go.sum", GO_SUM);
     expect(deps).toHaveLength(2);
-    expect(deps).toContainEqual({ name: "github.com/gin-gonic/gin", version: "1.9.1", ecosystem: "go" });
-    expect(deps).toContainEqual({ name: "github.com/stretchr/testify", version: "1.8.4", ecosystem: "go" });
+    expect(deps).toContainEqual({
+      name: "github.com/gin-gonic/gin",
+      version: "1.9.1",
+      ecosystem: "go",
+    });
+    expect(deps).toContainEqual({
+      name: "github.com/stretchr/testify",
+      version: "1.8.4",
+      ecosystem: "go",
+    });
   });
 });
 

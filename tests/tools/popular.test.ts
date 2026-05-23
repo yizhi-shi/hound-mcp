@@ -47,7 +47,9 @@ describe("hound_popular", () => {
     vi.mocked(depsdev.getPackage).mockImplementation(async (_, name) => makePackage(name));
     vi.mocked(osv.queryVulnsBatch).mockResolvedValue([[], []]);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({
       ecosystem: "npm",
       packages: ["express", "lodash"],
     });
@@ -61,7 +63,9 @@ describe("hound_popular", () => {
     vi.mocked(depsdev.getPackage).mockImplementation(async (_, name) => makePackage(name));
     vi.mocked(osv.queryVulnsBatch).mockResolvedValue([[VULN_FIXTURE], []]);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({
       ecosystem: "npm",
       packages: ["express", "lodash"],
     });
@@ -75,7 +79,9 @@ describe("hound_popular", () => {
     vi.mocked(depsdev.getPackage).mockImplementation(async (_, name) => makePackage(name));
     vi.mocked(osv.queryVulnsBatch).mockResolvedValue(Array.from({ length: 10 }, () => []));
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({ ecosystem: "npm" });
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({ ecosystem: "npm" });
     const text = getText(result);
     expect(text).toContain("npm popular packages");
     expect(text).toContain("express@1.0.0");
@@ -88,7 +94,9 @@ describe("hound_popular", () => {
     });
     vi.mocked(osv.queryVulnsBatch).mockResolvedValue([[]]);
 
-    const result = await (tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>)({
+    const result = await (
+      tool.handler as (args: Record<string, unknown>, extra?: unknown) => Promise<unknown>
+    )({
       ecosystem: "npm",
       packages: ["express", "badpkg"],
     });

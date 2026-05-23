@@ -44,7 +44,7 @@ describe("getDefaultVersion", () => {
   });
 
   it("returns undefined for an empty array", () => {
-    const result = getDefaultVersion([] as typeof VERSION_A[]);
+    const result = getDefaultVersion([] as (typeof VERSION_A)[]);
     expect(result).toBeUndefined();
   });
 
