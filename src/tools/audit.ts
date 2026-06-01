@@ -166,8 +166,8 @@ export function register(server: McpServer) {
 
         lines.push("");
         lines.push("─".repeat(50));
-        lines.push("💡 Run hound_upgrade <package> to find a safe version for each.");
-        lines.push("💡 Run hound_vulns <package> <version> for full advisory details.");
+        lines.push("💡 Run upgrade <package> to find a safe version for each.");
+        lines.push("💡 Run vulns <package> <version> for full advisory details.");
       }
 
       if (truncated) {

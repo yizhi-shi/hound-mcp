@@ -190,10 +190,10 @@ export function register(server: McpServer) {
       }
 
       if (vulns.length > 0) {
-        lines.push(`💡 Run hound_vulns for full vulnerability details.`);
+        lines.push(`💡 Run vulns for full vulnerability details.`);
       }
       if (blockers.length > 0) {
-        lines.push(`💡 Run hound_upgrade to find a safe version.`);
+        lines.push(`💡 Run upgrade to find a safe version.`);
       }
 
       lines.push("");
